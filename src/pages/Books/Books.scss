@@ -1,0 +1,47 @@
+.books-page {
+  .search-section {
+    margin-bottom: 3rem;
+    text-align: center;
+
+    h1 {
+      margin-bottom: 2rem;
+    }
+  }
+
+  .books-grid {
+    margin-top: 2rem;
+  }
+
+  .book-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s;
+
+    &:hover {
+      transform: translateY(-5px);
+    }
+
+    .MuiCardContent-root {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .description {
+      margin: 1rem 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .price {
+      margin: 1rem 0;
+    }
+
+    .MuiButton-root {
+      margin-top: auto;
+    }
+  }
+} 
