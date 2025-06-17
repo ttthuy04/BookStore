@@ -1,6 +1,9 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { ThemeProvider, createTheme } from '@mui/material';
+import { Routes, Route } from 'react-router-dom';
+import { ThemeProvider, CssBaseline } from '@mui/material';
+import { CartProvider } from './context/CartContext';
+import { BookProvider } from './context/BookContext';
+import theme from './theme';
 import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
 import Home from './pages/Home/Home';
@@ -8,28 +11,14 @@ import Books from './pages/Books/Books';
 import BookDetail from './pages/BookDetail/BookDetail';
 import Cart from './pages/Cart/Cart';
 import About from './pages/About/About';
-import { CartProvider } from './context/CartContext';
 import './App.scss';
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#1976d2',
-    },
-    secondary: {
-      main: '#dc004e',
-    },
-  },
-  typography: {
-    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
-  },
-});
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
+      <CssBaseline />
       <CartProvider>
-        <Router>
+        <BookProvider>
           <div className="app">
             <Navbar />
             <main className="main-content">
@@ -43,7 +32,7 @@ function App() {
             </main>
             <Footer />
           </div>
-        </Router>
+        </BookProvider>
       </CartProvider>
     </ThemeProvider>
   );
