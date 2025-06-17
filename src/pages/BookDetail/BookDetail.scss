@@ -13,28 +13,92 @@
   }
 
   .book-info {
-    .rating-section {
+    .book-title {
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    .book-author {
+      margin-bottom: 1.5rem;
+    }
+
+    .book-rating {
       display: flex;
       align-items: center;
       gap: 1rem;
+      margin-bottom: 1.5rem;
     }
 
-    .price {
+    .book-actions {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .divider {
       margin: 1.5rem 0;
     }
 
-    .add-to-cart-btn {
-      margin: 2rem 0;
+    .book-price-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+
+      .price-container {
+        .original-price {
+          text-decoration: line-through;
+          color: #999;
+          margin-bottom: 0.25rem;
+        }
+
+        .book-price {
+          font-weight: 600;
+        }
+      }
+
+      .quantity-container {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        .MuiTextField-root {
+          width: 100px;
+        }
+      }
+    }
+
+    .shipping-info {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #666;
+      margin-bottom: 1.5rem;
+
+      .shipping-icon {
+        color: #1976d2;
+      }
+    }
+
+    .book-description {
+      margin-bottom: 2rem;
+
+      .MuiTypography-h5 {
+        margin-bottom: 1rem;
+      }
     }
 
     .book-details {
-      background-color: #f5f5f5;
-      padding: 1.5rem;
-      border-radius: 4px;
-    }
+      .MuiTypography-h5 {
+        margin-bottom: 1rem;
+      }
 
-    .long-description {
-      line-height: 1.6;
+      .MuiGrid-item {
+        margin-bottom: 1rem;
+      }
     }
   }
 }
@@ -49,20 +113,22 @@
 }
 
 .book-image-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
   .book-image {
-    max-width: 100%;
+    width: 100%;
     height: auto;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-    
-    &:hover {
-      transform: scale(1.02);
-    }
+    display: block;
+  }
+
+  .bestseller-chip,
+  .discount-chip {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
   }
 }
 
@@ -88,5 +154,19 @@
   
   .book-image-container {
     margin-bottom: 2rem;
+  }
+
+  .book-detail {
+    .book-info {
+      .book-price-section {
+        flex-direction: column;
+        align-items: flex-start;
+
+        .quantity-container {
+          width: 100%;
+          justify-content: space-between;
+        }
+      }
+    }
   }
 } 

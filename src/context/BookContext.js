@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import bookService from '../services/bookService';
+import { books } from '../data/books';
 
 const BookContext = createContext();
 
@@ -12,7 +13,7 @@ export const useBooks = () => {
 };
 
 export const BookProvider = ({ children }) => {
-  const [books, setBooks] = useState([]);
+  const [booksList, setBooksList] = useState([]);
   const [featuredBooks, setFeaturedBooks] = useState([]);
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -28,7 +29,7 @@ export const BookProvider = ({ children }) => {
           bookService.getFeaturedBooks(),
           bookService.getAllCategories()
         ]);
-        setBooks(allBooks);
+        setBooksList(allBooks);
         setFeaturedBooks(featured);
         setCategories(allCategories);
         setError(null);
@@ -47,7 +48,7 @@ export const BookProvider = ({ children }) => {
   const addBook = async (bookData) => {
     try {
       const newBook = bookService.addBook(bookData);
-      setBooks(prevBooks => [...prevBooks, newBook]);
+      setBooksList(prevBooks => [...prevBooks, newBook]);
       return newBook;
     } catch (err) {
       setError('Failed to add book');
@@ -60,7 +61,7 @@ export const BookProvider = ({ children }) => {
     try {
       const updatedBook = bookService.updateBook(id, bookData);
       if (updatedBook) {
-        setBooks(prevBooks =>
+        setBooksList(prevBooks =>
           prevBooks.map(book =>
             book.id === id ? updatedBook : book
           )
@@ -92,7 +93,7 @@ export const BookProvider = ({ children }) => {
     try {
       const success = bookService.deleteBook(id);
       if (success) {
-        setBooks(prevBooks => prevBooks.filter(book => book.id !== id));
+        setBooksList(prevBooks => prevBooks.filter(book => book.id !== id));
         setFeaturedBooks(prevFeatured =>
           prevFeatured.filter(book => book.id !== id)
         );
@@ -106,22 +107,28 @@ export const BookProvider = ({ children }) => {
 
   // Tìm kiếm sách
   const searchBooks = (query) => {
-    return bookService.searchBooks(query);
+    const searchTerm = query.toLowerCase();
+    return booksList.filter(
+      book =>
+        book.title.toLowerCase().includes(searchTerm) ||
+        book.author.toLowerCase().includes(searchTerm) ||
+        book.description.toLowerCase().includes(searchTerm)
+    );
   };
 
   // Lấy sách theo danh mục
   const getBooksByCategory = (category) => {
-    return bookService.getBooksByCategory(category);
+    return booksList.filter(book => book.category === category);
   };
 
   // Lấy sách theo giá
   const getBooksByPriceRange = (min, max) => {
-    return bookService.getBooksByPriceRange(min, max);
+    return booksList.filter(book => book.price >= min && book.price <= max);
   };
 
   // Lấy sách theo đánh giá
-  const getBooksByRating = (minRating) => {
-    return bookService.getBooksByRating(minRating);
+  const getBooksByRating = (rating) => {
+    return booksList.filter(book => book.rating >= rating);
   };
 
   // Lấy sách đang giảm giá
@@ -139,19 +146,24 @@ export const BookProvider = ({ children }) => {
     return bookService.getBestSellingBooks(limit);
   };
 
+  const getBookById = (id) => {
+    return booksList.find(book => book.id === id);
+  };
+
   const value = {
-    books,
+    books: booksList,
     featuredBooks,
     categories,
     loading,
     error,
-    addBook,
-    updateBook,
-    deleteBook,
-    searchBooks,
+    getBookById,
     getBooksByCategory,
     getBooksByPriceRange,
     getBooksByRating,
+    searchBooks,
+    addBook,
+    updateBook,
+    deleteBook,
     getDiscountedBooks,
     getLatestBooks,
     getBestSellingBooks

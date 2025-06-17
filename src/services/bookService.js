@@ -1,34 +1,69 @@
-import { books, categories, getFeaturedBooks, getBooksByCategory, getBookById, searchBooks } from '../data/books';
+import books, { categories } from '../data/books';
 
 class BookService {
   // Lấy tất cả sách
   getAllBooks() {
-    return books;
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(books);
+      }, 500);
+    });
   }
 
   // Lấy sách nổi bật
   getFeaturedBooks() {
-    return getFeaturedBooks();
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const featuredBooks = books.filter(book => book.bestseller);
+        resolve(featuredBooks);
+      }, 500);
+    });
   }
 
   // Lấy sách theo danh mục
   getBooksByCategory(category) {
-    return getBooksByCategory(category);
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const filteredBooks = books.filter(book => book.category === category);
+        resolve(filteredBooks);
+      }, 500);
+    });
   }
 
   // Lấy sách theo ID
   getBookById(id) {
-    return getBookById(id);
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        const book = books.find(book => book.id === id);
+        if (book) {
+          resolve(book);
+        } else {
+          reject(new Error('Book not found'));
+        }
+      }, 500);
+    });
   }
 
   // Tìm kiếm sách
   searchBooks(query) {
-    return searchBooks(query);
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const searchResults = books.filter(book => 
+          book.title.toLowerCase().includes(query.toLowerCase()) ||
+          book.author.toLowerCase().includes(query.toLowerCase())
+        );
+        resolve(searchResults);
+      }, 500);
+    });
   }
 
   // Lấy tất cả danh mục
   getAllCategories() {
-    return categories;
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(categories);
+      }, 500);
+    });
   }
 
   // Thêm sách mới
@@ -68,31 +103,56 @@ class BookService {
 
   // Lấy sách theo giá
   getBooksByPriceRange(min, max) {
-    return books.filter(book => book.price >= min && book.price <= max);
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const filteredBooks = books.filter(book => 
+          book.price >= min && book.price <= max
+        );
+        resolve(filteredBooks);
+      }, 500);
+    });
   }
 
   // Lấy sách theo đánh giá
   getBooksByRating(minRating) {
-    return books.filter(book => book.rating >= minRating);
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const filteredBooks = books.filter(book => book.rating >= minRating);
+        resolve(filteredBooks);
+      }, 500);
+    });
   }
 
   // Lấy sách đang giảm giá
   getDiscountedBooks() {
-    return books.filter(book => book.discount > 0);
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const saleBooks = books.filter(book => book.discount > 0);
+        resolve(saleBooks);
+      }, 500);
+    });
   }
 
   // Lấy sách mới nhất
   getLatestBooks(limit = 5) {
-    return [...books]
-      .sort((a, b) => b.publishedYear - a.publishedYear)
-      .slice(0, limit);
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const sortedBooks = [...books]
+          .sort((a, b) => b.publishedYear - a.publishedYear);
+        resolve(sortedBooks.slice(0, limit));
+      }, 500);
+    });
   }
 
   // Lấy sách bán chạy nhất
   getBestSellingBooks(limit = 5) {
-    return [...books]
-      .sort((a, b) => b.reviews - a.reviews)
-      .slice(0, limit);
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const sortedBooks = [...books]
+          .sort((a, b) => b.reviews - a.reviews);
+        resolve(sortedBooks.slice(0, limit));
+      }, 500);
+    });
   }
 }
 
