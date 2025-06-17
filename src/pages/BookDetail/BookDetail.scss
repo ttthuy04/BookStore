@@ -37,4 +37,56 @@
       line-height: 1.6;
     }
   }
+}
+
+.book-detail-container {
+  padding: 2rem 0;
+}
+
+.book-detail-paper {
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.book-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  
+  .book-image {
+    max-width: 100%;
+    height: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    
+    &:hover {
+      transform: scale(1.02);
+    }
+  }
+}
+
+.book-info {
+  .add-to-cart-button {
+    margin: 1rem 0;
+    padding: 0.75rem 2rem;
+  }
+  
+  .book-details {
+    margin-top: 2rem;
+    
+    .MuiGrid-item {
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+@media (max-width: 960px) {
+  .book-detail-paper {
+    padding: 1rem;
+  }
+  
+  .book-image-container {
+    margin-bottom: 2rem;
+  }
 } 
