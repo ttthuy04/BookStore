@@ -6,20 +6,26 @@
 
 Bookstore is a modern e-commerce platform built with React and Material-UI, offering a seamless shopping experience for book lovers. The application features a clean, intuitive interface with smooth animations and responsive design.
 
+## 📸 Screenshots
+
+### 🏠 Home Page
+![Home Page](./screenshots/home.png)
+
+### 📖 Book Detail
+![Book Detail](./screenshots/bookdetail.png)
+
+### 🛒 Cart
+![Cart](./screenshots/cart.png)
+
 ## ✨ Features
 
 ### 🏠 Home Page
-image.png
-
 - Hero section with featured books
 - Grid layout of book cards
 - Interactive hover effects
 - Quick action buttons (Add to Cart, Favorite, Bookmark)
 
 ### 📖 Book Details
-image.png
-image.png
-
 - Detailed book information
 - Image gallery
 - Price and discount display
@@ -28,8 +34,6 @@ image.png
 - Related books suggestions
 
 ### 🛒 Shopping Cart
-image.png
-
 - Real-time cart updates
 - Quantity adjustment
 - Price calculation
